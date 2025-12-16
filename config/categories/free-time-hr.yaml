@@ -1,0 +1,65 @@
+categories:
+  - name: Gaming i igranje igara
+    questions:
+      - question: Koje vrste igara najviše voliš igrati?
+        instruction: Npr. "FPS (Valorant, CS2)", "MOBA (League of Legends)", "single-player story igre", "mobile games", "retro igre".
+      - question: Na kojoj platformi najčešće igraš?
+        instruction: Npr. "PC", "PlayStation", "Xbox", "Nintendo Switch", "mobilni telefon".
+      - question: Koliko sati tjedno približno provedeš igrajući?
+        instruction: Budi realan – prosječan broj sati.
+      - question: Igraš li sam ili s prijateljima/online communityjem?
+        instruction: Npr. "uglavnom solo", "s frendovima u partyju", "ranked s randomima".
+      - question: Što te trenutno muči ili što želiš poboljšati u vezi gaminga?
+        instruction: Npr. poboljšati skill, smanjiti tilt, pronaći nove igre, organizirati LAN party, uštedjeti za novi hardware.
+
+  - name: Igranje nogometa ili drugih sportova
+    questions:
+      - question: Koji sport najčešće igraš u slobodno vrijeme?
+        instruction: Npr. "nogomet", "košarka", "odbojka", "trčanje", "teretana".
+      - question: Gdje obično igraš ili treniraš?
+        instruction: Npr. "igralište u kvartu", "fakultetski tereni", "SC", "park", "s prijateljima na betonu".
+      - question: Koliko često se baviš tim sportom?
+        instruction: Npr. "2-3 puta tjedno", "svaki vikend", "samo ljeti".
+      - question: Igraš li organizirano (liga, ekipa) ili rekreativno?
+        instruction: Npr. "rekreativno s frendovima", "studentska liga", "samo kad se dogovorimo".
+      - question: Što želiš postići ili promijeniti?
+        instruction: Npr. pronaći ekipu, poboljšati kondiciju, organizirati turnir, savjeti za opremu po studentskom budžetu.
+
+  - name: Šetnja i opuštanje vani
+    questions:
+      - question: U kojem kvartu ili dijelu grada najčešće šetaš?
+        instruction: Npr. "Jarun", "Bundek", "Maksimir", "centar Zagreba", "riva u Splitu".
+      - question: Šetaš li sam/a ili s društvom?
+        instruction: Npr. "najviše sam", "s prijateljima", "s psom", "s dečkom/djevojkom".
+      - question: Koliko često ideš u šetnju ili na svježi zrak?
+        instruction: Npr. "svaki dan", "vikendom", "samo kad je lijepo vrijeme".
+      - question: Voliš li šetnju kombinirati s nečim drugim?
+        instruction: Npr. slušanje podcasta, fotografiranje, kava u parku, piknik.
+      - question: Što tražiš ili želiš poboljšati?
+        instruction: Npr. nove rute, motivaciju za redovitu šetnju, mirna mjesta za opuštanje, društvo za šetnju.
+
+  - name: Druženje s prijateljima
+    questions:
+      - question: Koliko često se viđaš s prijateljima izvan faksa?
+        instruction: Npr. "gotovo svaki dan", "1-2 puta tjedno", "samo vikendom".
+      - question: Koje aktivnosti najviše radite kad se družite?
+        instruction: Npr. "sjedimo na kavi", "kućni tulumi", "igranje društvenih igara", "izlazak", "Netflix & chill".
+      - question: Gdje se najčešće nalazite?
+        instruction: Npr. "kod nekog doma", "u kafiću", "u parku", "studentski dom".
+      - question: Imaš li stalnu ekipu ili se družiš s različitim ljudima?
+        instruction: Npr. "stalna ekipa od 4-5 ljudi", "ovisno o prilici".
+      - question: Što želiš promijeniti ili organizirati?
+        instruction: Npr. više zajedničkih aktivnosti, jeftine ideje za druženje, upoznati nove ljude, tradicija tjednog druženja.
+
+  - name: Ostale hobije i opuštanje
+    questions:
+      - question: Koji su ti glavni hobiji u slobodno vrijeme (osim gaminga i sporta)?
+        instruction: Npr. "čitanje knjiga", "crtanje", "sviranje gitare", "kuhanje", "gledanje serija".
+      - question: Koliko vremena tjedno posvećuješ hobijima?
+        instruction: Približan broj sati.
+      - question: Imaš li prostor ili opremu potrebnu za hobije?
+        instruction: Npr. "da, sve imam", "fali mi neka oprema", "koristim fakultetske resurse".
+      - question: Dijeliš li hobije s prijateljima ili su individualni?
+        instruction: Npr. "individualni", "ponekad s frendovima".
+      - question: Što želiš postići ili isprobati?
+        instruction: Npr. novi hobi, više vremena za postojeći, savjeti kako započeti nešto novo po studentskom budžetu.
