@@ -1,130 +1,174 @@
-Product Specification: Prompt Generator CLI
-===========================================
+# Product Specification: Prompt Generator CLI (Student Edition)
 
-1\. Overview
-------------
+## 1. Overview
 
-**Product Name:** Prompt Generator CLI
+**Product Name:** Prompt Generator CLI  
 
-**Type:** Command-line interface (CLI) tool written in Python.
+**Type:** Command-line interface (CLI) tool written in Python.  
 
-**Purpose:** A lightweight, standalone tool that helps software developers generate high-quality, structured prompts for Large Language Models (LLMs) such as ChatGPT, Gemini, Grok, Claude, etc. The tool guides the user through a series of simple questions specific to a chosen development phase, collects the answers, and assembles a well-crafted English prompt ready to copy-paste into any LLM chat interface.
+**Purpose:**  
+A lightweight, extensible CLI tool that helps users (primarily students) generate high-quality, structured English prompts for Large Language Models (LLMs) such as ChatGPT, Gemini, Grok, Claude, etc.  
 
-The initial version is intentionally simple and hard-coded -- no external configuration files, no database, no web framework. All prompt templates and questions are defined directly in the code.
+The tool dynamically loads prompt categories and their questions from YAML configuration files, making it flexible and easy to extend with new themes without changing the code.
 
-2\. Target Users
-----------------
+The initial focus is on **student life topics** (university routines, social life, food, commuting, budgeting), but the architecture supports any domain by simply adding new YAML files.
 
--   Software developers, architects, product owners, and QA engineers working on software product development.
--   Anyone who wants to leverage LLMs more effectively during ideation, design, architecture, implementation, testing, or deployment phases.
+## 2. Target Users
 
-3\. Key Features (MVP)
-----------------------
+- University students in Croatia (or similar contexts) seeking practical AI-generated advice on daily student challenges.
+- Anyone who wants a reusable, configurable prompt generator for themed conversational guidance.
 
-1.  **Interactive Category Selection** The tool presents a list of predefined development phases/categories.
-2.  **Guided Question Flow per Category** For the selected category, the tool asks 4--8 simple, targeted questions (via input()). Questions are hard-coded and designed to gather the most relevant context.
-3.  **Prompt Assembly** Using the user's answers, the tool fills a hard-coded prompt template (in English) that follows LLM best practices:
-    -   Clear role assignment
-    -   Detailed context
-    -   Specific instructions
-    -   Desired output format
-    -   Chain-of-thought encouragement where appropriate
-4.  **Output**
-    -   Displays the final generated prompt in a clearly marked block.
-    -   Offers to copy it to the clipboard (using pyperclip if available, with graceful fallback).
-    -   Asks if the user wants to generate another prompt or exit.
+## 3. Key Features (Version 2 – Config-Driven)
 
-4\. Supported Categories (Initial Set)
---------------------------------------
+1. **Dynamic Configuration Loading**  
+   - Categories and questions are loaded from YAML files located in the `./config/categories/` folder.  
+   - By default, only files in `./config/categories/student/` are loaded (student mode).  
+   - Other subfolders/modes are ignored unless selected.
 
-The MVP must include at least the following categories with corresponding hard-coded question flows and templates:
+2. **Mode Selection**  
+   - Default mode: `student` – automatically loads all YAML files from `./config/categories/student/`.  
+   - Mode can be overridden via command-line argument (e.g., `--mode student`).  
+   - Future extensions may add other modes by creating new subfolders.
 
-1.  **Ideation & Product Discovery** Focus: brainstorming features, user needs, problem validation.
-2.  **Product Specifications** Focus: writing user stories, functional/non-functional requirements, acceptance criteria.
-3.  **Solution Architecture** Focus: high-level design, tech stack choices, component diagram suggestions.
-4.  **Detailed Implementation** Focus: code structure, algorithms, specific module implementation.
-5.  **Testing** Focus: unit/integration/e2e test cases, edge cases, test data generation.
-6.  **CI/CD & Deployment** Focus: pipeline scripts, Dockerfiles, cloud deployment configurations.
+3. **Interactive Workflow**  
+   - Main menu: Display a numbered list of all loaded categories (merged from all YAML files in the active mode, sorted alphabetically).  
+   - Include an option to exit (e.g., 0).  
+   - After selecting a category:  
+     - Sequentially ask each question defined in the YAML (show `question` and then `instruction` as helper text).  
+     - Allow aborting at any question (e.g., empty input or typing "abort" → return to main menu).  
+   - After completing all questions (or abort): proceed to prompt generation only if all answers collected.
 
-(Developer may add 1--2 additional categories if time permits, but the above six are required.)
+4. **Prompt Generation**  
+   - Use a **hard-coded prompt template engine** that combines:  
+     - A fixed system role and instructions.  
+     - The selected category name.  
+     - All user answers clearly labeled.  
+   - Generated prompt is always in **English** and follows LLM best practices (role-playing, context, step-by-step reasoning, formatted output request).  
+   - Display the final prompt in a clearly marked multi-line block.  
+   - Optional: copy to clipboard using `pyperclip` (with fallback message if not installed).
+
+5. **Main Loop**  
+   - After displaying a generated prompt, ask if the user wants to generate another one (y/n).  
+   - If yes → return to category selection.  
+   - If no → exit gracefully.
+
+## 4. Configuration Structure
+
+YAML files are placed in `./config/categories/student/` (default mode).
+
+Each YAML file follows this exact structure and may contain one or more categories:
+
+```yaml
+categories:
+  - name: Category Name In Croatian
+    questions:
+      - question: Question text shown to user
+        instruction: Helper text shown below the question
+      - question: Another question
+        instruction: Another helper instruction
+  # Multiple categories allowed per file
+````
+
+All YAML files in the active mode folder are loaded and merged.
 
 5\. Technical Requirements
 --------------------------
 
--   **Language:** Python 3.8+
--   **Dependencies:**
-    -   Standard library only for core functionality.
-    -   Optional: pyperclip for clipboard support (detect and use if installed; otherwise inform user to copy manually).
--   **Entry Point:** Script should be executable via python prompt_generator_cli.py or installed as a console script if packaged.
--   **No external APIs or internet access required** -- fully offline.
--   **Code Structure Suggestions (recommended, not mandatory):**
-    -   Main script file (prompt_generator_cli.py or main.py)
-    -   Separate module/file for prompt templates and question definitions (e.g., templates.py)
-    -   Clear functions for each category to keep main() readable.
+-   **Language:** Python 3.8+
+-   **Dependencies:**
+    -   pyyaml -- required for loading configuration files.
+    -   Optional: pyperclip -- for clipboard functionality (detect if installed).
+- Recommended Project Structure:
 
-6\. User Experience Flow (Example)
-----------------------------------
+```text
+prompt_generator_cli/
+├── prompt_generator_cli.py     # Main executable script
+├── config/
+│   └── categories/
+│       └── student/
+│           ├── faculty_life.yaml
+│           ├── social_life.yaml
+│           └── ...                 # Additional YAML files
+└── README.md
+```
 
-```text$ python prompt_generator_cli.py
+- Execution:
 
-Welcome to Prompt Generator CLI!
+```text
+python prompt_generator_cli.py          # Default student mode
+python prompt_generator_cli.py --mode student
+```
 
-Select a category:
-1. Ideation & Product Discovery
-2. Product Specifications
-3. Solution Architecture
-4. Detailed Implementation
-5. Testing
-6. CI/CD & Deployment
+6\. User Experience Example
 
-Enter number: 3
+```text
+$ python prompt_generator_cli.py
 
---- Solution Architecture ---
+Welcome to Prompt Generator CLI (Student Edition)!
 
-1/6: What is the main purpose of the application? 
-> A fintech platform for salary advances
+Available categories:
+1. Život na fakultetu
+2. Izlazak i društveni život
+3. Hrana i menza
+4. Putovanje na faks i kući
+5. Ušteda novca kao student
+0. Exit
 
-2/6: What are the key non-functional requirements (e.g., scalability, security, performance)?
-> High security (GDPR, PCI-DSS), handle 100k+ users, low latency
+Select a category (number): 1
 
-... (remaining questions) ...
+--- Život na fakultetu ---
+
+1. Koji fakultet pohađaš i koju godinu studija?
+   Npr. "FER, 3. godina preddiplomskog" ili ...
+   > FER, 3. godina
+
+2. Koje su ti najveće poteškoće...
+   > održavanje koncentracije
+
+... (all questions)
 
 Here is your generated prompt:
 
-"""[Well-structured English prompt appears here]"""
+"""
+You are an experienced academic coach specialized in helping university students...
+[Full English prompt incorporating all answers]
+"""
 
-Prompt copied to clipboard! (or "Please copy the prompt above manually.")
-Generate another prompt? (y/n):```
+Prompt copied to clipboard! (or "Please copy manually")
 
-7\. Prompt Quality Guidelines
------------------------------
+Generate another prompt? (y/n):
+```
 
-All generated prompts must:
+7\. Prompt Template Guidelines (Hard-coded)
+-------------------------------------------
 
--   Be entirely in **English**.
--   Assign a clear role to the LLM (e.g., "You are an expert software architect...").
--   Provide sufficient context from user answers.
--   Specify the desired output format (e.g., Markdown sections, Mermaid diagrams, JSON).
--   Encourage step-by-step reasoning where appropriate.
--   Be optimized for the selected development phase.
+The hard-coded prompt builder must:
+
+-   Begin with a strong system role (e.g., "You are a friendly, practical student advisor...").
+-   Include the category name for context.
+-   List each answer with a clear label (e.g., "Faculty and year: FER, 3rd year undergraduate").
+-   End with instructions for the LLM to respond in Croatian, using structured format (headings, bullet points, actionable steps).
+
+The template is generic enough to work with any category/question set loaded from config.
 
 8\. Deliverables
 ----------------
 
--   Fully functional Python CLI tool meeting the requirements above.
--   README.md with:
-    -   Short description
-    -   Installation/usage instructions
-    -   Example session
-    -   How to extend with new categories (for future maintenance)
+-   Fully functional, configuration-driven CLI tool.
+-   Pre-populated ./config/categories/student/ folder with student-themed YAML files (as previously defined).
+-   README.md containing:
+    -   Description
+    -   Installation steps (pip install pyyaml)
+    -   Usage instructions and examples
+    -   Guide for adding new categories or modes
 
-9\. Non-Goals (for MVP)
------------------------
+9\. Non-Goals (Current Version)
+-------------------------------
 
--   Dynamic template loading from files/YAML/JSON
--   GUI or web interface
--   Integration with specific LLMs
--   Persistent history
--   Advanced validation or error correction
+-   Simultaneous multi-mode support
+-   In-app config editing
+-   GUI or web version
+-   Session history persistence
+-   Per-category custom prompt templates
 
-This specification is intentionally high-level to allow developer judgment while ensuring the core value -- fast, high-quality prompt generation -- is delivered.
+This design ensures the tool is **dynamically flexible** --- category listing and question flow depend entirely on the YAML files in the active mode folder, while core application logic remains simple and maintainable.
