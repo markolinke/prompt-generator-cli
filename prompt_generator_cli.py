@@ -312,14 +312,45 @@ def copy_to_clipboard(text):
     if HAS_PYPERCLIP:
         try:
             pyperclip.copy(text)
-            print("Prompt copied to clipboard!")
+            print(f"{Colors.BRIGHT_GREEN}✓ Prompt copied to clipboard!{Colors.RESET}")
             return True
         except Exception:
-            print("Could not copy to clipboard. Please copy manually.")
+            print(f"{Colors.BRIGHT_YELLOW}⚠ Could not copy to clipboard. Please copy manually.{Colors.RESET}")
             return False
     else:
-        print("Please copy manually (pyperclip not installed).")
+        print(f"{Colors.YELLOW}ℹ Please copy manually (pyperclip not installed).{Colors.RESET}")
         return False
+
+
+def display_prompt_and_ask_continue(prompt):
+    """Display the generated prompt and ask if user wants to generate another.
+    
+    Returns:
+        True if user wants to continue, False if user wants to exit
+    """
+    print(f"\n{Colors.BRIGHT_CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}  {Colors.BRIGHT_WHITE}{Colors.BOLD}GENERATED PROMPT{Colors.RESET}  {Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}╚═══════════════════════════════════════════════════════════╝{Colors.RESET}\n")
+    print(f"{Colors.BRIGHT_BLUE}{Colors.BOLD}Prompt:{Colors.RESET}\n")
+    triple_quotes = '"""'
+    print(f"{Colors.CYAN}{Colors.BOLD}{triple_quotes}{Colors.RESET}")
+    print(f"{Colors.WHITE}{prompt}{Colors.RESET}")
+    print(f"{Colors.CYAN}{Colors.BOLD}{triple_quotes}{Colors.RESET}")
+    print()
+    
+    copy_to_clipboard(prompt)
+    print()
+    
+    while True:
+        again = input(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}→{Colors.RESET} {Colors.CYAN}Generate another prompt? (y/n):{Colors.RESET} ").strip().lower()
+        if again in ['y', 'yes']:
+            print(f"{Colors.BRIGHT_GREEN}✓ Starting new prompt generation...{Colors.RESET}\n")
+            return True
+        elif again in ['n', 'no']:
+            print(f"\n{Colors.BRIGHT_YELLOW}{Colors.BOLD}Goodbye!{Colors.RESET}\n")
+            return False
+        else:
+            print(f"{Colors.BRIGHT_RED}⚠{Colors.RESET} {Colors.RED}Please enter 'y' or 'n'.{Colors.RESET}")
 
 
 def main():
@@ -335,7 +366,7 @@ def main():
         category = get_category_choice(categories)
         
         if category is None:
-            print("Goodbye!")
+            print(f"\n{Colors.BRIGHT_YELLOW}{Colors.BOLD}Goodbye!{Colors.RESET}\n")
             break
         
         answers = collect_answers(category)
@@ -346,24 +377,8 @@ def main():
         retro_loading_effect()
         prompt = generate_prompt(category['name'], answers)
         
-        print("\nHere is your generated prompt:\n")
-        print('"""')
-        print(prompt)
-        print('"""')
-        print()
-        
-        copy_to_clipboard(prompt)
-        print()
-        
-        while True:
-            again = input("Generate another prompt? (y/n): ").strip().lower()
-            if again in ['y', 'yes']:
-                break
-            elif again in ['n', 'no']:
-                print("Goodbye!")
-                return
-            else:
-                print("Please enter 'y' or 'n'.")
+        if not display_prompt_and_ask_continue(prompt):
+            return
 
 
 if __name__ == "__main__":
