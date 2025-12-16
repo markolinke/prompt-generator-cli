@@ -13,6 +13,38 @@ except ImportError:
     HAS_PYPERCLIP = False
 
 
+# ANSI color codes (no external dependencies)
+class Colors:
+    """ANSI color codes for terminal output."""
+    # Reset
+    RESET = '\033[0m'
+    
+    # Text colors
+    BLACK = '\033[30m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    MAGENTA = '\033[35m'
+    CYAN = '\033[36m'
+    WHITE = '\033[37m'
+    
+    # Bright colors
+    BRIGHT_BLACK = '\033[90m'
+    BRIGHT_RED = '\033[91m'
+    BRIGHT_GREEN = '\033[92m'
+    BRIGHT_YELLOW = '\033[93m'
+    BRIGHT_BLUE = '\033[94m'
+    BRIGHT_MAGENTA = '\033[95m'
+    BRIGHT_CYAN = '\033[96m'
+    BRIGHT_WHITE = '\033[97m'
+    
+    # Styles
+    BOLD = '\033[1m'
+    DIM = '\033[2m'
+    UNDERLINE = '\033[4m'
+
+
 CONFIG_FILE = "config/categories/student-life-hr.yaml"
 
 
@@ -116,13 +148,15 @@ def load_categories():
 
 def display_menu(categories):
     """Display category selection menu."""
-    print("\nWelcome to Prompt Generator CLI (Student Edition)!\n")
-    print("Available categories:")
+    print(f"\n{Colors.BRIGHT_CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}  {Colors.BRIGHT_WHITE}{Colors.BOLD}Welcome to Prompt Generator CLI (Student Edition)!{Colors.RESET}  {Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}╚═══════════════════════════════════════════════════════════╝{Colors.RESET}\n")
+    print(f"{Colors.BRIGHT_BLUE}{Colors.BOLD}Available categories:{Colors.RESET}")
     
     sorted_categories = sorted(categories, key=lambda x: x['name'])
     for i, category in enumerate(sorted_categories, 1):
-        print(f"{i}. {category['name']}")
-    print("0. Exit")
+        print(f"  {Colors.BRIGHT_GREEN}{Colors.BOLD}{i}.{Colors.RESET} {Colors.GREEN}{category['name']}{Colors.RESET}")
+    print(f"  {Colors.BRIGHT_YELLOW}{Colors.BOLD}0.{Colors.RESET} {Colors.YELLOW}Exit{Colors.RESET}")
     print()
 
 
@@ -132,25 +166,29 @@ def get_category_choice(categories):
     
     while True:
         try:
-            choice = input("Select a category (number): ").strip()
+            choice = input(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}→{Colors.RESET} {Colors.CYAN}Select a category (number):{Colors.RESET} ").strip()
             if choice == "0":
                 return None
             
             choice_num = int(choice)
             if 1 <= choice_num <= len(sorted_categories):
-                return sorted_categories[choice_num - 1]
+                selected = sorted_categories[choice_num - 1]
+                print(f"{Colors.BRIGHT_GREEN}✓ Selected: {Colors.GREEN}{selected['name']}{Colors.RESET}\n")
+                return selected
             else:
-                print(f"Please enter a number between 1 and {len(sorted_categories)}, or 0 to exit.")
+                print(f"{Colors.BRIGHT_RED}⚠{Colors.RESET} {Colors.RED}Please enter a number between 1 and {len(sorted_categories)}, or 0 to exit.{Colors.RESET}")
         except ValueError:
-            print("Please enter a valid number.")
+            print(f"{Colors.BRIGHT_RED}⚠{Colors.RESET} {Colors.RED}Please enter a valid number.{Colors.RESET}")
         except KeyboardInterrupt:
-            print("\nExiting...")
+            print(f"\n{Colors.YELLOW}Exiting...{Colors.RESET}")
             sys.exit(0)
 
 
 def collect_answers(category):
     """Collect answers for all questions in a category."""
-    print(f"\n--- {category['name']} ---\n")
+    print(f"\n{Colors.BRIGHT_CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}  {Colors.BRIGHT_WHITE}{Colors.BOLD}{category['name']}{Colors.RESET}  {Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}╚═══════════════════════════════════════════════════════════╝{Colors.RESET}\n")
     
     answers = []
     questions = category.get('questions', [])
@@ -159,21 +197,22 @@ def collect_answers(category):
         question_text = q.get('question', '')
         instruction = q.get('instruction', '')
         
-        print(f"{i}. {question_text}")
+        print(f"{Colors.BRIGHT_BLUE}{Colors.BOLD}Question {i}/{len(questions)}:{Colors.RESET}")
+        print(f"{Colors.BRIGHT_WHITE}  {question_text}{Colors.RESET}")
         if instruction:
-            print(f"   {instruction}")
+            print(f"{Colors.DIM}{Colors.CYAN}  💡 {instruction}{Colors.RESET}")
         
-        user_input = input("   > ").strip()
+        user_input = input(f"{Colors.BRIGHT_YELLOW}  →{Colors.RESET} {Colors.YELLOW}Your answer:{Colors.RESET} ").strip()
         
         if not user_input or user_input.lower() == "abort":
-            print("\nAborted. Returning to main menu.")
+            print(f"\n{Colors.YELLOW}⚠ Aborted. Returning to main menu.{Colors.RESET}\n")
             return None
         
         answers.append({
             'question': question_text,
             'answer': user_input
         })
-        print()
+        print(f"{Colors.BRIGHT_GREEN}  ✓ Answer saved{Colors.RESET}\n")
     
     return answers
 
