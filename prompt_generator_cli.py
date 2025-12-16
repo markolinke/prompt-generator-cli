@@ -219,6 +219,50 @@ def collect_answers(category):
     return answers
 
 
+def startup_loading_effect():
+    """Display a retro Commodore 64-style startup loading animation."""
+    messages = [
+        "LOADING...",
+        "PREPARING LAYOUT...",
+        "INITIALIZING INTERFACE...",
+        "READY",
+    ]
+    
+    # C64 style: simple, direct, classic colors
+    print(f"\n{Colors.BRIGHT_CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}  {Colors.BRIGHT_WHITE}{Colors.BOLD}COMMODORE 64 SYSTEM{Colors.RESET}  {Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}")
+    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}╚═══════════════════════════════════════════════════════════╝{Colors.RESET}\n")
+    
+    for msg in messages:
+        # Typewriter effect with C64 style
+        chars = list(msg)
+        display_text = ""
+        
+        # Print with typewriter effect
+        for char in chars:
+            display_text += char
+            print(f"\r{Colors.BRIGHT_CYAN}{Colors.BOLD}>{Colors.RESET} {Colors.CYAN}{display_text}{Colors.RESET}{Colors.BLACK}█{Colors.RESET}", end='', flush=True)
+            time.sleep(0.05)  # Slightly slower for startup
+        
+        # Add dots animation for non-READY messages
+        if msg != "READY":
+            for dot_count in range(1, 4):
+                dots = "." * dot_count
+                print(f"\r{Colors.BRIGHT_CYAN}{Colors.BOLD}>{Colors.RESET} {Colors.CYAN}{msg}{dots}{Colors.RESET}{Colors.BLACK}█{Colors.RESET}", end='', flush=True)
+                time.sleep(0.15)
+            print(f"\r{Colors.BRIGHT_CYAN}{Colors.BOLD}>{Colors.RESET} {Colors.BRIGHT_GREEN}{msg} ✓{Colors.RESET}")
+        else:
+            # Special treatment for READY
+            print(f"\r{Colors.BRIGHT_CYAN}{Colors.BOLD}>{Colors.RESET} {Colors.BRIGHT_GREEN}{Colors.BOLD}{msg} ✓{Colors.RESET}")
+        
+        # Delay between messages
+        if msg != "READY":
+            time.sleep(0.3)
+    
+    print(f"\n{Colors.BRIGHT_GREEN}{Colors.BOLD}*** SYSTEM READY ***{Colors.RESET}\n")
+    time.sleep(0.5)
+
+
 def retro_loading_effect():
     """Display a retro Commodore 64-style loading animation with flamboyant messages."""
     messages = [
@@ -355,6 +399,7 @@ def display_prompt_and_ask_continue(prompt):
 
 def main():
     """Main application loop."""
+    startup_loading_effect()
     categories = load_categories()
     
     if not categories:
