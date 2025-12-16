@@ -1,0 +1,84 @@
+categories:
+  - name: Ideation & Product Discovery
+    questions:
+      - question: What is the main problem or opportunity this product addresses?
+        instruction: Describe the core problem or user need in 2-4 sentences.
+      - question: Who is the primary target user or customer?
+        instruction: Define the main user persona(s) (e.g., small business owners, teachers, developers).
+      - question: What are the key goals or desired outcomes for the users?
+        instruction: List 3-5 main objectives the users want to achieve with this product.
+      - question: Are there any existing solutions or competitors?
+        instruction: Mention similar products or alternatives, if any, and their shortcomings.
+      - question: What are the top 3-5 must-have features you envision?
+        instruction: Focus on the most critical features needed for an MVP.
+
+  - name: Product Specifications
+    questions:
+      - question: What is the name or short description of the feature/user story?
+        instruction: Provide a concise title or one-sentence summary.
+      - question: As a [user role], I want [goal] so that [reason].
+        instruction: Fill in the classic user story format (you can leave parts blank if not applicable).
+      - question: What are the functional requirements?
+        instruction: List the main behaviors or capabilities the feature must provide.
+      - question: What are the key non-functional requirements?
+        instruction: Include performance, security, scalability, usability, etc.
+      - question: What are the acceptance criteria?
+        instruction: Define clear, testable conditions that determine when the feature is "done".
+
+  - name: Solution Architecture
+    questions:
+      - question: What is the primary purpose and domain of the application?
+        instruction: E.g., "A fintech platform for instant salary advances" or "An e-learning system for corporate training".
+      - question: What are the most important non-functional requirements?
+        instruction: Focus on scalability, security, performance, availability, compliance (e.g., GDPR, PCI-DSS).
+      - question: What is the preferred tech stack or existing constraints?
+        instruction: Mention languages, frameworks, databases, cloud providers, or legacy systems.
+      - question: What are the expected peak user load and data volume?
+        instruction: Provide rough estimates (e.g., 10k concurrent users, 1M daily transactions).
+      - question: Are there any required integrations with external systems?
+        instruction: List APIs, third-party services, payment gateways, etc.
+      - question: Do you need specific architectural patterns or deliverables?
+        instruction: E.g., microservices, event-driven, serverless, or a Mermaid component diagram.
+
+  - name: Detailed Implementation
+    questions:
+      - question: What programming language and framework are you using?
+        instruction: E.g., Python/FastAPI, TypeScript/React + Node.js, etc.
+      - question: Describe the specific module, function, or feature to implement.
+        instruction: Provide a clear scope of what needs to be coded.
+      - question: What are the inputs and expected outputs?
+        instruction: Define parameters, data structures, API contracts, or UI behavior.
+      - question: Are there any specific algorithms or business rules involved?
+        instruction: Mention calculations, validations, workflows, or edge cases.
+      - question: Do you have any preferences for code style or patterns?
+        instruction: E.g., clean architecture, SOLID principles, specific libraries.
+
+  - name: Testing
+    questions:
+      - question: What is the name or description of the feature/component to test?
+        instruction: Provide a short identifier for the functionality being tested.
+      - question: What type of tests do you need?
+        instruction: Choose or list: unit tests, integration tests, end-to-end tests, or all.
+      - question: What is the main happy-path scenario?
+        instruction: Describe the primary successful flow and expected result.
+      - question: What are the most important edge cases or error conditions?
+        instruction: List unusual inputs, failures, or boundary conditions.
+      - question: Which testing framework(s) should be used?
+        instruction: E.g., pytest, Jest, Cypress, Playwright, etc.
+      - question: Do you need sample test data or mocks?
+        instruction: Specify if realistic data examples or stubbed services are required.
+
+  - name: CI/CD & Deployment
+    questions:
+      - question: What is the target deployment environment?
+        instruction: E.g., AWS (ECS/Fargate), Kubernetes, Vercel, Docker Compose, Heroku.
+      - question: Which CI/CD platform or tool are you using?
+        instruction: E.g., GitHub Actions, GitLab CI, Jenkins, CircleCI.
+      - question: What are the main stages of the pipeline?
+        instruction: Typically: lint → test → build → deploy (specify any custom stages).
+      - question: Are there any specific build requirements?
+        instruction: Dockerfiles, multi-stage builds, artifact publishing, etc.
+      - question: Do you need environment-specific configurations or secrets handling?
+        instruction: Mention staging/production differences, secret management tools.
+      - question: Are there any post-deployment steps?
+        instruction: E.g., database migrations, cache warming, notifications.

@@ -1,0 +1,65 @@
+categories:
+  - name: Život na fakultetu
+    questions:
+      - question: Koji fakultet pohađaš i koju godinu studija?
+        instruction: Npr. "FER, 3. godina preddiplomskog" ili "FFZG, 1. godina diplomskog".
+      - question: Koje su ti najveće poteškoće u organizaciji učenja?
+        instruction: Npr. održavanje koncentracije, previše obveza, odgađanje učenja.
+      - question: Koliko sati dnevno/tjedno približno učiš?
+        instruction: Budi realan – prosječan broj sati.
+      - question: Koristiš li neke tehnike ili alate za učenje (Pomodoro, Anki, Notion...)?
+        instruction: Navedi koje, ili napiši "ne" ako ne koristiš ništa posebno.
+      - question: Što želiš postići ovim promptom?
+        instruction: Npr. bolji raspored učenja, savjeti za koncentraciju, motivaciju za ispite.
+
+  - name: Izlazak i društveni život
+    questions:
+      - question: U kojem gradu studiraš i gdje najčešće izlaziš?
+        instruction: Npr. "Zagreb, Tkalča, Jarun" ili "Split, riva i klubovi na Bačvicama".
+      - question: Koliko često izlaziš tjedno/mjesečno?
+        instruction: Npr. "svaki vikend", "1-2 puta mjesečno", "rijetko".
+      - question: Koji je tvoj budžet za izlaske mjesečno?
+        instruction: Približan iznos u eurima (npr. 50-100 €).
+      - question: Preferiraš li kafiće, klubove, kućne tulume ili nešto drugo?
+        instruction: Navedi što ti je najdraže.
+      - question: Što te najviše muči kod izlazaka?
+        instruction: Npr. skupo piće, kasni povratak, mamurluk, pronalaženje društva.
+
+  - name: Hrana i menza
+    questions:
+      - question: Koristiš li studentsku menzu ili X-icu?
+        instruction: Napiši "da/redovito", "povremeno" ili "ne".
+      - question: Koliko približno trošiš mjesečno na hranu?
+        instruction: Ukupno – menza, samoposluge, dostava, restorani.
+      - question: Kuhaš li sam/a ili najčešće jedeš vani?
+        instruction: Npr. "kuham 4-5 puta tjedno", "uglavnom dostava".
+      - question: Imaš li neke prehrambene navike ili ograničenja?
+        instruction: Npr. vegetarijanac, bez glutena, halal, ili nema ograničenja.
+      - question: Što želiš poboljšati ili saznati?
+        instruction: Npr. jeftini recepti, najbolje menze u gradu, zdrava brza hrana.
+
+  - name: Putovanje na faks i kući
+    questions:
+      - question: Iz kojeg grada/mjesta putuješ na faks ili kući?
+        instruction: Npr. "iz Osijeka u Zagreb" ili "stanujem u studentskom domu".
+      - question: Koji prijevoz najčešće koristiš?
+        instruction: Npr. vlak, autobus (Arriva, FlixBus), auto, bicikl, tramvaj.
+      - question: Koliko vremena dnevno/tjedno provedeš u putovanju?
+        instruction: Približno u satima.
+      - question: Koliko mjesečno trošiš na karte i prijevoz?
+        instruction: Približan iznos u eurima.
+      - question: Što želiš optimizirati?
+        instruction: Npr. jeftinije karte, brži put, bolji raspored, dijeljenje prijevoza.
+
+  - name: Ušteda novca kao student
+    questions:
+      - question: Koliko novca mjesečno imaš na raspolaganju (stipendija, blokica, posao, roditelji)?
+        instruction: Približan ukupan iznos u eurima.
+      - question: Na što najviše trošiš novac?
+        instruction: Npr. stanarina, hrana, izlasci, fakultetski materijali, zabava.
+      - question: Imaš li studentski posao ili neki drugi izvor prihoda?
+        instruction: Npr. "da, konobar vikendom", "ne", "povremeni freelance".
+      - question: Koristiš li neke popuste ili kartice (ISIC, studentski račun, loyalty programi)?
+        instruction: Navedi koje ili napiši "ne".
+      - question: Koji je tvoj glavni cilj u vezi novca?
+        instruction: Npr. uštedjeti za putovanje, smanjiti troškove, bolje upravljati budžetom.
