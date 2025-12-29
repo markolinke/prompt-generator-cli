@@ -63,3 +63,5 @@ categories:
         instruction: Navedi koje ili napiši "ne".
       - question: Koji je tvoj glavni cilj u vezi novca?
         instruction: Npr. uštedjeti za putovanje, smanjiti troškove, bolje upravljati budžetom.
+      - question: Želiš li uštediti smršaviti?
+        instruction: Npr. želim smršaviti ili ne želim smršaviti.
