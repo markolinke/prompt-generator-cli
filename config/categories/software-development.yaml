@@ -71,7 +71,7 @@ categories:
   - name: CI/CD & Deployment
     questions:
       - question: What is the target deployment environment?
-        instruction: E.g., AWS (ECS/Fargate), Kubernetes, Vercel, Docker Compose, Heroku.
+        instruction: E.g., AWS (ECS/Fargate or something else), Kubernetes, Vercel, Docker Compose, Heroku.
       - question: Which CI/CD platform or tool are you using?
         instruction: E.g., GitHub Actions, GitLab CI, Jenkins, CircleCI.
       - question: What are the main stages of the pipeline?

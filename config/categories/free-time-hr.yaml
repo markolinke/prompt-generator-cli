@@ -20,7 +20,7 @@ categories:
         instruction: Npr. "igralište u kvartu", "fakultetski tereni", "SC", "park", "s prijateljima na betonu".
       - question: Koliko često se baviš tim sportom?
         instruction: Npr. "2-3 puta tjedno", "svaki vikend", "samo ljeti".
-      - question: Igraš li organizirano (liga, ekipa) ili rekreativno?
+      - question: Igraš li organizirano (liga, ekipa, škola...) ili rekreativno?
         instruction: Npr. "rekreativno s frendovima", "studentska liga", "samo kad se dogovorimo".
       - question: Što želiš postići ili promijeniti?
         instruction: Npr. pronaći ekipu, poboljšati kondiciju, organizirati turnir, savjeti za opremu po studentskom budžetu.
