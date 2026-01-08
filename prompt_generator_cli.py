@@ -6,7 +6,7 @@ Prompt Generator CLI - Simple tool to generate AI prompts from YAML configuratio
 import re
 import sys
 import time
-from animations import startup_loading_effect, retro_loading_effect
+from animations import startup_loading_effect, retro_loading_effect, display_menu
 from colors import Colors
 
 try:
@@ -120,20 +120,6 @@ def load_categories():
         sys.exit(1)
 
 
-def display_menu(categories):
-    """Display category selection menu."""
-    print(f"\n{Colors.BRIGHT_CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗{Colors.RESET}")
-    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}  {Colors.BRIGHT_WHITE}{Colors.BOLD}Welcome to Prompt Generator CLI (Student Edition)!{Colors.RESET}  {Colors.BRIGHT_CYAN}{Colors.BOLD}║{Colors.RESET}")
-    print(f"{Colors.BRIGHT_CYAN}{Colors.BOLD}╚═══════════════════════════════════════════════════════════╝{Colors.RESET}\n")
-    print(f"{Colors.BRIGHT_BLUE}{Colors.BOLD}Available categories:{Colors.RESET}")
-    
-    sorted_categories = sorted(categories, key=lambda x: x['name'])
-    for i, category in enumerate(sorted_categories, 1):
-        print(f"  {Colors.BRIGHT_GREEN}{Colors.BOLD}{i}.{Colors.RESET} {Colors.GREEN}{category['name']}{Colors.RESET}")
-    print(f"  {Colors.BRIGHT_YELLOW}{Colors.BOLD}0.{Colors.RESET} {Colors.YELLOW}Exit{Colors.RESET}")
-    print()
-
-
 def get_category_choice(categories):
     """Get user's category selection."""
     sorted_categories = sorted(categories, key=lambda x: x['name'])
@@ -189,10 +175,6 @@ def collect_answers(category):
         print(f"{Colors.BRIGHT_GREEN}  ✓ Answer saved{Colors.RESET}\n")
     
     return answers
-
-
-
-
 
 
 def generate_prompt(category_name, answers):
