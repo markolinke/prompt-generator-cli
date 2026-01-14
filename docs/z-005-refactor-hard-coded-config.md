@@ -27,7 +27,22 @@ Ili za environment varijable:
 
 ## 2. Praktični zadatak: Refaktoriranje konfiguracije (hands-on)
 
-Radit ćemo u istom repozitoriju. **Sve radimo na novom branchu!**
+Radit ćemo u istom repozitoriju. **Sve radimo na novom branchu!**.
+
+Evo što želimo promijeniti
+
+1. Korisnik po ulasku u aplikaciju dobiva na izbor koju konfiguraciju želi (koju tematiku)
+  - Aplikacija treba dinamički učitati koje sve datoteke postoje u config/categories direktoriju, pa ih dati korisniku na izbor (npr. menu 1, 2, 3...)
+  - Korisnik odabere tematiku, nakon toga ide aplikacija kao i do sada
+
+2. Moguće je preskočiti ovo biranje tako da se aplikaciju pokreće s "komand argumentima"
+  - Npr pokrenuti app s `python main.py --file free-time-hr` preskace odabir datoteke i odmah ucitava datoteku free-time-hr.yaml
+  - Za ovo se koristi `argparse`, odn parser argumenata
+  - Googlaj:
+     - Sto je to argparse u Pythonu
+     - Sto su to argumenti
+     - Sto je to parser
+  
 
 ### Korak po korak:
 
@@ -70,7 +85,7 @@ config_file = get_config_path(args.config)
 
 6. **Testiraj lokalno na više načina** (zabavan dio!)  
    - Pokreni bez argumenata → treba koristiti default.  
-   - Pokreni sa `python main.py --config config/categories/druga-konfig.yaml`  
+   - Pokreni sa `python main.py --config druga-konfig` (ovo znači da se koristi `config/categories/druga-config.yaml` datoteka
    - Postavi environment varijablu i pokreni program:  
      - Windows: `set PROMPT_GENERATOR_CONFIG=config/categories/treca.yaml`  
      - Mac/Linux: `export PROMPT_GENERATOR_CONFIG=config/categories/treca.yaml`
