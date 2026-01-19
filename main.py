@@ -30,7 +30,7 @@ def main():
             continue
         
         retro_loading_effect()
-        prompt = generate_prompt(category['name'], answers)
+        prompt = generate_prompt(category.get('name'), answers)
         
         if not display_prompt_and_ask_continue(prompt):
             break
