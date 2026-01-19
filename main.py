@@ -7,13 +7,14 @@ from Prompts.prompt_generator_cli import collect_answers, generate_prompt, displ
 
 
 def main():
-    """Main application loop."""
-    startup_loading_effect()
     categories = load_categories()
     
     if not categories:
         print("Error: No categories found in configuration file.")
         sys.exit(1)
+
+    """Main application loop."""
+    startup_loading_effect()
     
     while True:
         display_menu(categories)
