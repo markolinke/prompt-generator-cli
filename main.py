@@ -33,7 +33,7 @@ def main():
         prompt = generate_prompt(category['name'], answers)
         
         if not display_prompt_and_ask_continue(prompt):
-            return
+            break
 
 
 if __name__ == "__main__":
